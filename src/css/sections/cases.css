@@ -38,6 +38,7 @@
 
 .case-header {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     margin-bottom: 2rem;
     padding-bottom: 1rem;
@@ -61,7 +62,8 @@
     color: #94a3b8;
     margin: 0;
     padding-left: 1rem;
-    border-left: 1px solid rgba(96, 165, 250, 0.1);
+    /* border-left: 1px solid rgba(96, 165, 250, 0.1); */
+    border-left: 2px solid rgb(201 0 255);
 }
 
 .case-main {
@@ -69,6 +71,43 @@
     grid-template-columns: 400px 1fr;
     gap: 2rem;
     margin-bottom: 2rem;
+}
+
+.swiper-pagination{
+    margin-top: 20px;
+    position: static !important;
+}
+
+.swiper-pagination-bullet{
+    width: 12px !important;
+    height: 12px !important;
+    background-color: #fff !important;
+}
+
+@media (max-width: 767px) {
+    .swiper-pagination-bullet{
+        width: 8px !important;
+        height: 8px !important;
+        background-color: #fff !important;
+    }
+}
+
+.cases-slider .case-main {
+    grid-template-columns: 1fr;
+}
+
+.cases-slider .case-title {
+    flex-direction: column;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+}
+
+.cases-slider .case-title h3 {
+    color: #fff;
+}
+
+.case-preview-image{
+    max-width: 100%;
 }
 
 .case-gallery-container {
@@ -196,7 +235,6 @@
     border-radius: 1rem;
     border: 1px solid rgba(96, 165, 250, 0.1);
     transition: border-color 0.3s ease;
-    
 }
 
 .case-gallery-results h4 {

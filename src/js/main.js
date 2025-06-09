@@ -5,15 +5,36 @@ import { pricingData, renderPricingCard } from './pricingData.js';
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize neural background
     initNeuralBackground();
-    // initScrollAnimation();
 
-    // Render cases first
-    const casesContainer = document.querySelector('.cases-grid');
+    // Render cases
+    const casesContainer = document.querySelector('.cases-slider .swiper-wrapper');
     casesContainer.innerHTML = casesData.map(caseData => renderCaseCard(caseData)).join('');
 
-    // Then initialize sliders after content is rendered
-    const sliders = document.querySelectorAll('.slider');
-    sliders.forEach(slider => initializeSlider(slider));
+    // Initialize cases slider
+    const casesSwiper = new Swiper('.cases-slider .swiper', {
+        slidesPerView: 1,
+        spaceBetween: 30,
+        pagination: {
+            el: '.cases-slider .swiper-pagination',
+            clickable: true,
+        },
+
+        autoplay: {
+            delay: 5000, // 5 секунд
+            disableOnInteraction: false // продолжать автопрокрутку после взаимодействия пользователя
+        },
+
+        breakpoints: {
+            // >= 768px
+            768: {
+                slidesPerView: 2,
+            },
+            // >= 1024px
+            1024: {
+                slidesPerView: 2,
+            }
+        }
+    });
 
     // Initialize pricing cards
     const pricingContainer = document.querySelector('.pricing-grid');
@@ -169,7 +190,10 @@ const testimonialsSwiper = new Swiper('.testimonials-slider .swiper', {
     centeredSlides: true,
     loop: false,
     slidesPerView: 1.3,
-     navigation: false,
+    pagination: {
+            el: '.testimonials-slider .swiper-pagination',
+            clickable: true,
+    },
     breakpoints: {
         768: {
             centeredSlides: false,

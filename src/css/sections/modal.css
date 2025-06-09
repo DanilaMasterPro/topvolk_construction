@@ -192,20 +192,3 @@
 .close-case-modal:hover {
     color: #fff;
 }
-
-/* Стили для кнопки просмотра в карточке */
-.view-case-btn {
-    background: transparent;
-    border: 1px solid rgba(108, 92, 231, 0.5);
-    color: #fff;
-    padding: 0.75rem 1.5rem;
-    border-radius: 0.5rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin-right: 1rem;
-}
-
-.view-case-btn:hover {
-    background: rgba(108, 92, 231, 0.1);
-    transform: translateY(-2px);
-}
