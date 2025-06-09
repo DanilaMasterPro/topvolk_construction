@@ -1,0 +1,80 @@
+.problems {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    /* background: #1e293b; */
+    padding: 4rem 0;
+}
+
+
+
+.problems-content {
+    padding: 2rem;
+    background: #1e1e1e; /* Тёмный фон как в консоли */
+    border: 1px solid #454545;
+    border-radius: 0.5rem;
+    width: 100%;
+    font-family: 'Consolas', 'Monaco', monospace; /* Шрифт как в консоли */
+    position: relative;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Добавляем заголовок как в консоли */
+.problems-content::before {
+    content: '⚠️ Problems';
+    display: block;
+    padding: 0.5rem 1rem;
+    background: #2d2d2d;
+    border-bottom: 1px solid #454545;
+    border-radius: 0.5rem 0.5rem 0 0;
+    font-size: 0.9rem;
+    color: #cccccc;
+    margin: -2rem -2rem 1rem -2rem;
+}
+
+.question {
+    margin: 0.5rem 0;
+    padding-left: 1.5rem;
+    font-size: 1rem;
+    color: #cccccc;
+    position: relative;
+    line-height: 1.5;
+}
+
+
+/* Добавляем стрелку как в консоли перед каждым сообщением */
+.question::before {
+    content: '>';
+    position: absolute;
+    left: 0;
+    color: #4a9eff;
+}
+
+.cta {
+    margin-top: 2rem;
+    padding: 1rem;
+    background: #2d2d2d;
+    border: 1px solid #454545;
+    border-radius: 0.25rem;
+    color: #4a9eff;
+    font-style: italic;
+}
+
+/* Добавляем эффект мигающего курсора в конце */
+.cta p::after {
+    content: '|';
+    animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+    50% { opacity: 0; }
+}
+
+
+@media (max-width: 768px) {
+    .problems {
+        padding: 0;
+    }
+    
+}
