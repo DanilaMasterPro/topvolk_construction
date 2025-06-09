@@ -119,3 +119,93 @@
 .success-btn:hover {
     transform: translateY(-2px);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.case-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 23, 42, 0.9);
+    z-index: 1000;
+    overflow-y: auto;
+}
+
+.case-modal-content {
+    position: relative;
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    margin: 30px auto;
+    padding: 0;
+    border: 1px solid rgba(96, 165, 250, 0.1);
+    border-radius: 1rem;
+    width: 90%;
+    max-width: 1200px;
+}
+
+.close-case-modal {
+    position: absolute;
+    right: 1.5rem;
+    top: 1rem;
+    font-size: 2rem;
+    color: #94a3b8;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    z-index: 1001;
+}
+
+.close-case-modal:hover {
+    color: #fff;
+}
+
+/* Стили для кнопки просмотра в карточке */
+.view-case-btn {
+    background: transparent;
+    border: 1px solid rgba(108, 92, 231, 0.5);
+    color: #fff;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-right: 1rem;
+}
+
+.view-case-btn:hover {
+    background: rgba(108, 92, 231, 0.1);
+    transform: translateY(-2px);
+}

@@ -23,6 +23,52 @@ export function renderCaseCard(caseData) {
                             <button class="slider-arrow next">→</button>
                         </div>
                     </div>
+                    
+                </div>
+
+                <div class="case-info">
+                    <div class="case-details">
+                        <div class="case-gallery-results">
+                         <h4>Результат:</h4>
+                            ${caseData.results.slice(0, -1).map(result => `<div class="result-item">${result}</div>`).join('')}
+                        </div>
+
+                        <div class="case-links">
+                            <button class="view-case-btn case-btn" data-case-id="${caseData.id}">👁 Посмотреть</button>
+                            <button class="case-btn contact-btn">📩 Хочу также</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+export function renderModalCaseCard(caseData) {
+    return `
+        <div class="case-card">
+            <div class="case-header">
+                <div class="case-title">
+                    <h3>${caseData.title}</h3>
+                    <p class="case-subtitle">${caseData.subtitle}</p>
+                </div>
+            </div>
+
+            <div class="case-main">
+                <div class="case-gallery-container">
+                    <div class="case-gallery">
+                        <div class="gallery-loader">
+                            <div class="loader-spinner"></div>
+                        </div>
+                        <div class="slider">
+                            ${caseData.images.map(img => `<img src="${img}" alt="${caseData.title} view" onload="this.closest('.case-gallery').querySelector('.gallery-loader').classList.add('hidden')">`).join('')}
+                        </div>
+                        <div class="slider-nav"></div>
+                        <div class="slider-arrows">
+                            <button class="slider-arrow prev">←</button>
+                            <button class="slider-arrow next">→</button>
+                        </div>
+                    </div>
                     <div class="case-gallery-results">
                          <h4>Результат:</h4>
                         ${caseData.results.slice(0, -1).map(result => `<div class="result-item">${result}</div>`).join('')}
@@ -45,7 +91,7 @@ export function renderCaseCard(caseData) {
                         </div>
 
                         <div class="case-links">
-                            <a href="${caseData.links.demo}" target="_blank" class="case-btn">👁 Смотреть сайт</a>
+                            <a href="${caseData.links.demo}" target="_blank" class="case-btn">🔗 Смотреть сайт</a>
                             <button class="case-btn contact-btn">📩 Хочу также</button>
                         </div>
                     </div>

@@ -1,4 +1,4 @@
-import { casesData, renderCaseCard } from './casesData.js';
+import { casesData, renderCaseCard, renderModalCaseCard } from './casesData.js';
 import { initNeuralBackground } from './neuralBackground.js';
 import { pricingData, renderPricingCard } from './pricingData.js';
 
@@ -209,4 +209,47 @@ document.addEventListener('DOMContentLoaded', function() {
         e.stopPropagation(); // Предотвращаем всплытие события
         imageModal.style.display = 'none';
     });
+});
+
+// Добавьте обработчики для модального окна кейсов
+const caseModal = document.getElementById('caseModal');
+const caseModalContent = document.getElementById('caseModalContent');
+const closeCaseModal = document.querySelector('.close-case-modal');
+
+// Обработчик для кнопки "Посмотреть"
+document.addEventListener('click', (e) => {
+    if (e.target.classList.contains('view-case-btn')) {
+        const caseId = e.target.dataset.caseId;
+        const caseData = casesData.find(c => c.id === caseId);
+        if (caseData) {
+            caseModalContent.innerHTML = renderModalCaseCard(caseData);
+            caseModal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+            
+            // Инициализируем слайдер для модального окна
+            const modalSlider = caseModalContent.querySelector('.slider');
+            if (modalSlider) {
+                initializeSlider(modalSlider);
+            }
+        }
+    }
+});
+
+// Закрытие модального окна при клике на крестик
+closeCaseModal.addEventListener('click', () => {
+    caseModal.style.display = 'none';
+    document.body.style.overflow = ''; // Возвращаем прокрутку
+});
+
+// Закрытие при клике вне контента
+caseModal.addEventListener('click', (e) => {
+    if (e.target === caseModal) {
+        caseModal.style.display = 'none';
+        document.body.style.overflow = '';
+    }
+});
+
+// Предотвращаем закрытие при клике на контент
+caseModalContent.addEventListener('click', (e) => {
+    e.stopPropagation();
 });
