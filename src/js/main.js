@@ -118,14 +118,18 @@ document.addEventListener('click', (e) => {
     }
 });
 
+// Обработчик закрытия по крестику
 span.addEventListener('click', () => {
     modal.style.display = 'none';
+    document.body.style.overflow = ''; // Возвращаем прокрутку
 });
 
+// Обработчик закрытия по клику вне модального окна
 window.addEventListener('click', (e) => {
     if (e.target === modal || e.target === successModal) {
         modal.style.display = 'none';
         successModal.style.display = 'none';
+        document.body.style.overflow = ''; // Возвращаем прокрутку
     }
 });
 
@@ -176,11 +180,15 @@ closeButtons.forEach(btn => {
     btn.addEventListener('click', () => {
         modal.style.display = 'none';
         successModal.style.display = 'none';
+        document.body.style.overflow = ''; // Возвращаем прокрутку
     });
 });
 
+// Изменяем обработчик для кнопки "Отлично"
 successBtn.addEventListener('click', () => {
     successModal.style.display = 'none';
+    modal.style.display = 'none';
+    document.body.style.overflow = '';
 });
 
 // Инициализация слайдера отзывов
@@ -254,6 +262,16 @@ document.addEventListener('click', (e) => {
             const modalSlider = caseModalContent.querySelector('.slider');
             if (modalSlider) {
                 initializeSlider(modalSlider);
+            }
+
+            // Добавляем обработчик для кнопки "Хочу также" внутри модального окна
+            const modalContactBtn = caseModalContent.querySelector('.contact-btn');
+            if (modalContactBtn) {
+                modalContactBtn.addEventListener('click', () => {
+                    caseModal.style.display = 'none'; // Закрываем модальное окно кейса
+                    modal.style.display = 'block'; // Открываем модальное окно контактной формы
+                    document.body.style.overflow = 'hidden'; // Оставляем блокировку прокрутки
+                });
             }
         }
     }
