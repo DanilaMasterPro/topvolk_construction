@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         autoplay: {
             delay: 5000, // 5 секунд
-            disableOnInteraction: false // продолжать автопрокрутку после взаимодействия пользователя
+            disableOnInteraction: true // продолжать автопрокрутку после взаимодействия пользователя
         },
 
         breakpoints: {
