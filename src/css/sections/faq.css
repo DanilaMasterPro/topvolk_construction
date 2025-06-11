@@ -45,6 +45,7 @@
 @media (max-width: 768px) {
     .faq {
         padding: 3rem 0;
+        padding-bottom: 0;
     }
 
     .faq-item {

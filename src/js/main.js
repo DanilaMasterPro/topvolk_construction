@@ -19,11 +19,6 @@ document.addEventListener('DOMContentLoaded', () => {
             clickable: true,
         },
 
-        autoplay: {
-            delay: 5000, // 5 секунд
-            disableOnInteraction: true // продолжать автопрокрутку после взаимодействия пользователя
-        },
-
         breakpoints: {
             // >= 768px
             768: {
@@ -38,7 +33,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize pricing cards
     const pricingContainer = document.querySelector('.pricing-grid');
-    pricingContainer.innerHTML = pricingData.map(pricing => renderPricingCard(pricing)).join('');
+    if (pricingContainer) {
+        pricingContainer.innerHTML = pricingData.map(pricing => renderPricingCard(pricing)).join('');
+    }
 });
 
 function initializeSlider(slider) {
@@ -107,89 +104,45 @@ function initializeSlider(slider) {
 // Modal handling
 const modal = document.getElementById('contactModal');
 const successModal = document.getElementById('successModal');
-const span = document.querySelector('.close-modal');
-const form = document.getElementById('contactForm');
 const closeButtons = document.querySelectorAll('.close-modal');
 const successBtn = document.querySelector('.success-btn');
 
+// Обработчик для всех кнопок contact-btn
 document.addEventListener('click', (e) => {
-    if (e.target.classList.contains('contact-btn')) {
-        modal.style.display = 'block';
-    }
-});
-
-// Обработчик закрытия по крестику
-span.addEventListener('click', () => {
-    modal.style.display = 'none';
-    document.body.style.overflow = ''; // Возвращаем прокрутку
-});
-
-// Обработчик закрытия по клику вне модального окна
-window.addEventListener('click', (e) => {
-    if (e.target === modal || e.target === successModal) {
-        modal.style.display = 'none';
-        successModal.style.display = 'none';
-        document.body.style.overflow = ''; // Возвращаем прокрутку
-    }
-});
-
-// Обновляем обработчик формы
-form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    
-    const name = document.getElementById('name').value;
-    const contact = document.getElementById('contact').value;
-    
-    const BOT_TOKEN = '7808652944:AAHDqPPqu2_IbKpFg02rBjWwtDJN_aDomjs'; // Replace with your bot token
-    const CHAT_ID = '612414314'; // Replace with your chat ID
-    
-    const message = `
-🔥 Новая заявка!
-
-👤 Имя: ${name}
-📱 Контакт: ${contact}
-    `;
-    
-    try {
-        const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                chat_id: CHAT_ID,
-                text: message,
-                parse_mode: 'HTML'
-            })
-        });
-
-        if (response.ok) {
-            form.reset();
-            modal.style.display = 'none';
-            successModal.style.display = 'block';
-        } else {
-            throw new Error('Ошибка отправки');
+    if (e.target.closest('.contact-btn')) {
+        e.preventDefault();
+        if (!e.target.closest('form')) { // Проверяем, что кнопка не внутри формы
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
         }
-    } catch (error) {
-        alert('Произошла ошибка. Пожалуйста, попробуйте позже.');
     }
 });
 
-// Обработчики закрытия для success модалки
+// Закрытие модальных окон
 closeButtons.forEach(btn => {
     btn.addEventListener('click', () => {
         modal.style.display = 'none';
         successModal.style.display = 'none';
-        document.body.style.overflow = ''; // Возвращаем прокрутку
+        document.body.style.overflow = '';
     });
 });
 
-// Изменяем обработчик для кнопки "Отлично"
-successBtn.addEventListener('click', () => {
-    successModal.style.display = 'none';
-    modal.style.display = 'none';
-    document.body.style.overflow = '';
+// Закрытие по клику вне модального окна
+window.addEventListener('click', (e) => {
+    if (e.target === modal || e.target === successModal) {
+        modal.style.display = 'none';
+        successModal.style.display = 'none';
+        document.body.style.overflow = '';
+    }
 });
+
+// Кнопка "Отлично" в окне успеха
+if (successBtn) {
+    successBtn.addEventListener('click', () => {
+        successModal.style.display = 'none';
+        document.body.style.overflow = '';
+    });
+}
 
 // Инициализация слайдера отзывов
 const testimonialsSwiper = new Swiper('.testimonials-slider .swiper', {
@@ -294,4 +247,82 @@ caseModal.addEventListener('click', (e) => {
 // Предотвращаем закрытие при клике на контент
 caseModalContent.addEventListener('click', (e) => {
     e.stopPropagation();
+});
+
+// Общая функция для отправки формы
+async function handleFormSubmit(formData, isCalculator = false) {
+    const BOT_TOKEN = '7808652944:AAHDqPPqu2_IbKpFg02rBjWwtDJN_aDomjs';
+    const CHAT_ID = '612414314';
+    
+    const message = `
+🔥 Новая заявка${isCalculator ? ' на расчет стоимости' : ''}!
+
+👤 Имя: ${formData.name}
+📱 Контакт: ${formData.contact}
+    `;
+    
+    try {
+        console.log('Sending to Telegram...');
+        
+        const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                chat_id: CHAT_ID,
+                text: message
+            })
+        });
+
+        const result = await response.json();
+        console.log('Telegram response:', result);
+
+        if (response.ok) {
+            return true;
+        } else {
+            throw new Error(`Ошибка отправки: ${result.description}`);
+        }
+    } catch (error) {
+        console.error('Error details:', error);
+        alert(`Произошла ошибка: ${error.message}`);
+        return false;
+    }
+}
+
+// Обработчик для обеих форм
+document.addEventListener('DOMContentLoaded', () => {
+    const contactForm = document.getElementById('contactForm');
+    const calculatorForm = document.getElementById('calculatorForm');
+
+    if (contactForm) {
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = {
+                name: document.getElementById('name').value,
+                contact: document.getElementById('contact').value
+            };
+            
+            if (await handleFormSubmit(formData)) {
+                contactForm.reset();
+                modal.style.display = 'none';
+                successModal.style.display = 'block';
+            }
+        });
+    }
+
+    if (calculatorForm) {
+        calculatorForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = {
+                name: document.getElementById('calc-name').value,
+                contact: document.getElementById('calc-contact').value
+            };
+            
+            if (await handleFormSubmit(formData, true)) {
+                calculatorForm.reset();
+                successModal.style.display = 'block';
+            }
+        });
+    }
 });
