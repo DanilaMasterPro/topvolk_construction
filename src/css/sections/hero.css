@@ -1,8 +1,9 @@
 .hero {
-    min-height: 100vh;
+    min-height: calc(100vh - 208px); /* 100vh минус высота хедера (1.5rem*2 + 60px логотип = ~108px) */
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: #fff;
 
 
 
@@ -12,7 +13,7 @@
 
 
 .hero-bg {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.3)), url(../../img/hero_bg.jpg);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3)), url(../../img/hero_bg.jpg);
     background-size: cover;
     border-radius: 16px;
     padding: 2rem;
@@ -36,7 +37,7 @@ h1 {
     font-size: 3.2rem;
     font-weight: 700;
     margin-bottom: 2rem;
-    color: #fff;
+    color: #ffffff;
 }
 
 .hero-content {
@@ -57,7 +58,8 @@ h1 {
     margin-top: 1rem;
     font-size: 1.1rem;
     padding: 1rem 2rem;
-    background: linear-gradient(135deg, #60a5fa 0%, #818cf8 100%);
+    /* Строительные цвета - сплошной голубой цвет */
+    background: #65b7bb;
     border: none;
     border-radius: 0.5rem;
     color: #fff;
@@ -66,13 +68,20 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 20px;
+    gap: 15px;
+    text-align: left;
 }
+
+.hero-cta i {
+    color: #ffffff;
+}
+
 
 
 .hero-cta:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(96, 165, 250, 0.3);
+    /* Простая тень одного цвета */
+    box-shadow: 0 6px 20px rgba(101, 183, 187, 0.4);
 }
 
 .hero-features {
@@ -98,19 +107,30 @@ h1 {
 }
 
 
+.hero-feature:hover {
+    border: 1px solid rgba(101, 183, 187, 0.3);
+    background: rgba(255, 255, 255, 0.15);
+}
+
 .hero-feature i {
     font-size: 20px;
-    color: #4a9eff;
+    color: #65b7bb;
+    transition: color 0.3s ease;
+}
+
+.hero-feature:hover i {
+    color: #65b7bb;
 }
 
 .hero-feature span {
-    color: #fff;
+    color: #ffffff;
     font-size: 14px;
 }
 
 @media (max-width: 768px) {
 
     .hero{
+        min-height: calc(100vh - 82px); /* Мобильная версия: 1rem*2 + 50px логотип = ~82px */
         padding: 4rem 0rem;
     }
     h1 {

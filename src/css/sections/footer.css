@@ -14,11 +14,16 @@
 
 .footer__logo {
     max-width: 150px;
+    max-height: 60px;
+    display: flex;
+    align-items: center;
 }
 
 .footer__logo img {
     width: 100%;
-    height: auto;
+    height: 100%;
+    max-height: 60px;
+    object-fit: contain;
 }
 
 .footer__nav__social {
@@ -28,13 +33,13 @@
 }
 
 .footer__nav__social a {
-    color: #fff;
+    color: #65b7bb;
     font-size: 1.5rem;
     transition: color 0.3s ease;
 }
 
 .footer__nav__social a:hover {
-    color: #60A5FA;
+    color: #65b7bb;
 }
 
 .footer__bottom {

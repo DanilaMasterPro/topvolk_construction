@@ -19,7 +19,7 @@
 }
 
 .about-content h2 {
-    color: #60a5fa;
+    color: #65b7bb;
     margin-bottom: 1.5rem;
 }
 
@@ -43,7 +43,7 @@
     content: "•";
     position: absolute;
     left: -1rem;
-    color: #60a5fa;
+    color: #65b7bb;
 }
 
 .about-image {
@@ -54,8 +54,8 @@
 .profile-photo {
     width: 100%;
     border-radius: 1rem;
-    border: 1px solid rgba(96, 165, 250, 0.1);
-    box-shadow: 0 4px 12px rgba(96, 165, 250, 0.15);
+    border: 1px solid rgba(101, 183, 187, 0.1);
+    box-shadow: 0 4px 12px rgba(101, 183, 187, 0.15);
 }
 
 .approach-grid {
@@ -66,8 +66,8 @@
 }
 
 .approach-card {
-    background: rgba(96, 165, 250, 0.1);
-    border: 1px solid rgba(96, 165, 250, 0.2);
+    background: rgba(101, 183, 187, 0.1);
+    border: 1px solid rgba(101, 183, 187, 0.2);
     border-radius: 1rem;
     padding: 2rem;
     transition: all 0.3s ease;
@@ -75,16 +75,23 @@
 
 .approach-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 4px 12px rgba(96, 165, 250, 0.2);
+    box-shadow: 0 4px 12px rgba(101, 183, 187, 0.2);
+    border: 1px solid rgba(101, 183, 187, 0.2);
 }
 
 .approach-icon {
     font-size: 2rem;
     margin-bottom: 1rem;
+    color: #65b7bb;
+    transition: color 0.3s ease;
+}
+
+.approach-card:hover .approach-icon {
+    color: #65b7bb;
 }
 
 .approach-card h3 {
-    color: #60a5fa;
+    color: #65b7bb;
     margin-bottom: 1rem;
 }
 
@@ -112,7 +119,7 @@
 }
 
 .about-content h2 {
-    color: #60a5fa;
+    color: #65b7bb;
     margin-bottom: 1.5rem;
 }
 
@@ -136,7 +143,7 @@
     content: "•";
     position: absolute;
     left: -1rem;
-    color: #60a5fa;
+    color: #65b7bb;
 }
 
 .tech-stack {
@@ -151,10 +158,9 @@
 }
 
 .tech-tag {
-    background: rgba(96, 165, 250, 0.1);
-
-    
-    border: 1px solid rgba(96, 165, 250, 0.2);
+    /* Строительные цвета - новый голубой фон и граница */
+    background: rgba(101, 183, 187, 0.1);
+    border: 1px solid rgba(101, 183, 187, 0.2);
     padding: 0.25rem 0.75rem;
     border-radius: 1rem;
     font-size: 0.9rem;
@@ -184,9 +190,9 @@
 .important-note {
     margin-top: 2rem;
     padding: 1rem;
-    background: rgba(96, 165, 250, 0.1);
+    background: rgba(101, 183, 187, 0.1);
     border-radius: 0.5rem;
-    border: 1px solid rgba(96, 165, 250, 0.2);
+    border: 1px solid rgba(101, 183, 187, 0.2);
 }
 
 .about-image {
@@ -197,7 +203,7 @@
 .profile-photo {
     width: 100%;
     border-radius: 1rem;
-    border: 1px solid rgba(96, 165, 250, 0.1);
+    border: 1px solid rgba(101, 183, 187, 0.1);
 }
 
 @media (max-width: 1024px) {

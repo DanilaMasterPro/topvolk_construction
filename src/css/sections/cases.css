@@ -103,7 +103,7 @@
 }
 
 .cases-slider .case-title h3 {
-    color: #fff;
+    color: #333333;
 }
 
 .case-preview-image{
@@ -152,10 +152,10 @@
 .slider-arrow {
     width: 40px;
     height: 40px;
-    background: rgba(96, 165, 250, 0.2);
-    border: 1px solid rgba(96, 165, 250, 0.3);
+    background: rgba(101, 183, 187, 0.2);
+    border: 1px solid rgba(101, 183, 187, 0.3);
     border-radius: 50%;
-    color: #fff;
+    color: #333333;
     font-size: 1.2rem;
     cursor: pointer;
     display: flex;
@@ -199,7 +199,7 @@
 
 .case-btn {
     padding: 0.75rem 1.5rem;
-    background: linear-gradient(135deg, #60a5fa 0%, #818cf8 100%);
+    background: #65b7bb;
     border: none;
     border-radius: 0.5rem;
     color: #fff;
@@ -264,8 +264,8 @@
 }
 
 .contact-btn {
-    /* background: linear-gradient(135deg, #60a5fa 0%, #818cf8 100%); */
-    background: #2673ff;
+    /* Строительные цвета - новый голубой градиент */
+    background: #65b7bb;
     border: none;
     border-radius: 0.5rem;
     color: #fff;
@@ -273,18 +273,13 @@
     padding: 0.75rem 1.5rem;
     cursor: pointer;
     transition: all 0.3s ease;
-
-   background: linear-gradient(135deg, #e100ff, #7300ff);
-color: #fff;
-border: none;
-box-shadow: 0 0 8px rgba(255, 0, 255, 0.6);
-
-
+    box-shadow: 0 0 8px rgba(101, 183, 187, 0.6);
 }
 
 .contact-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(96, 165, 250, 0.3);
+    /* Новая голубая тень при hover */
+    box-shadow: 0 4px 12px rgba(101, 183, 187, 0.4);
 }
 
 .cases-cta{

@@ -3,12 +3,9 @@ export function renderCaseCard(caseData) {
         <div class="swiper-slide">
             <div class="case-card">
                 <div class="case-header">
-
                     <div class="case-gallery-container">
                         <img src="${caseData.images[0]}" alt="${caseData.title} view" class="case-preview-image">
                     </div>
-
-                    
                 </div>
 
                 <div class="case-main">
@@ -19,13 +16,13 @@ export function renderCaseCard(caseData) {
                                 <p class="case-subtitle">${caseData.subtitle}</p>
                             </div>
                             <div class="case-gallery-results">
-                                <h4>Результат:</h4>
+                                <h4>Results:</h4>
                                 ${caseData.results.map(result => `<div class="result-item">${result}</div>`).join('')}
                             </div>
 
                             <div class="case-links">
-                                <button class="view-case-btn case-btn" data-case-id="${caseData.id}">Подробнее</button>
-                                <button class="case-btn contact-btn">📩 Хочу также</button>
+                                <button class="view-case-btn case-btn" data-case-id="${caseData.id}">Learn more</button>
+                                <button class="case-btn contact-btn">📩 I want same</button>
                             </div>
                         </div>
                     </div>
@@ -51,39 +48,34 @@ export function renderModalCaseCard(caseData) {
                         <div class="gallery-loader">
                             <div class="loader-spinner"></div>
                         </div>
-                        <div class="slider">
-                            ${caseData.images.map(img => `<img src="${img}" alt="${caseData.title} view" onload="this.closest('.case-gallery').querySelector('.gallery-loader').classList.add('hidden')">`).join('')}
-                        </div>
-                        <div class="slider-nav"></div>
-                        <div class="slider-arrows">
-                            <button class="slider-arrow prev">←</button>
-                            <button class="slider-arrow next">→</button>
-                        </div>
-                    </div>
-                    <div class="case-gallery-results">
-                         <h4>Результат:</h4>
-                        ${caseData.results.map(result => `<div class="result-item">${result}</div>`).join('')}
+                        ${caseData.images.map((image, index) => `
+                            <img src="${image}" alt="${caseData.title} view ${index + 1}" class="case-image" 
+                                 onload="this.style.opacity='1'" style="opacity: 0; transition: opacity 0.3s;">
+                        `).join('')}
                     </div>
                 </div>
 
                 <div class="case-info">
                     <div class="case-details">
-                        <h4 class="case-details-target">Цель проекта 🎯</h4>
-                        <p>${caseData.goal}</p>
-                        <br>
-                        <h4>Решение:</h4>
-                        <ol class="solution-steps">
-                            ${caseData.steps.map(step => `<li>${step}</li>`).join('')}
-                        </ol>
+                        <div class="case-goal">
+                            <h4>Goal:</h4>
+                            <p>${caseData.goal}</p>
+                        </div>
 
-                        <div class="case-mobile-results">
-                         <h4>Результат:</h4>
+                        <div class="case-steps">
+                            <h4>Implementation steps:</h4>
+                            <ol>
+                                ${caseData.steps.map(step => `<li>${step}</li>`).join('')}
+                            </ol>
+                        </div>
+
+                        <div class="case-results">
+                            <h4>Results:</h4>
                             ${caseData.results.map(result => `<div class="result-item">${result}</div>`).join('')}
                         </div>
 
                         <div class="case-links">
-                            <a href="${caseData.links.demo}" target="_blank" class="case-btn">🔗 Смотреть сайт</a>
-                            <button class="case-btn contact-btn">📩 Хочу также</button>
+                            <button class="case-btn contact-btn">📩 I want similar project</button>
                         </div>
                     </div>
                 </div>
@@ -94,158 +86,42 @@ export function renderModalCaseCard(caseData) {
 
 export const casesData = [
     {
-        id: 'wawe',
-        title: 'Wawe bank',
-        subtitle: 'Индонезийский Start-Up проект в области fin-tech',
+        id: 'levelhouse',
+        title: 'Modern Family Home',
+        subtitle: 'Contemporary residential construction project',
         images: [
-            './img/wawe1.jpg',
-            './img/wawe2.jpg',
-            './img/wawe3.jpg',
-            './img/wawe4.jpg',
-            './img/wawe5.jpg',
-            './img/wawe6.jpg'
+            './img/levelhouse1.jpg',
+            './img/levelhouse2.jpg',
+            './img/levelhouse3.jpg',
+            './img/levelhouse4.jpg',
+            './img/levelhouse5.jpg',
+            './img/levelhouse6.jpg',
+            './img/levelhouse7.jpg'
         ],
-        goal: 'Донести ценности и преимущества нового банка для индонезийской и англоязычной аудитории. Побудить пользователей установить мобильное приложение.',
+        goal: 'Build a modern, energy-efficient family home with open concept living and sustainable materials.',
         steps: [
-            'Анализ конкурентов - поиск интересных офферов, оценка уровня дизайна, формирование болей и потребностей целевой аудитории',
-            'Проектирование - Объеденение всех наиболее перспективных решений выявленных при анализе, создание прототипа',
-            'Дизайн - Сбор и удтверждение референсов, формирование концепции, отрисовка дизайн макета и UI Kit',
-            'Разработка - Ручная реализация проекта по средствам React/Next.js',
-            'Тестирование и отладка - Поиск и устранение проблем не корректного отображения на различных устройствах и платформах',
-            'Выпуск в продакшн - Размещение проекта на хостинге клиента, оптимизация скорости загрузки, подключение метрик'
+            'Site analysis – soil testing, surveying, and analyzing local building codes and restrictions',
+            'Planning – creating architectural drawings, obtaining permits, and developing construction timeline',
+            'Foundation – excavation, pouring concrete foundation, and waterproofing',
+            'Framing – building the structural framework using sustainable lumber',
+            'Systems installation – electrical, plumbing, and HVAC installation',
+            'Finishing – insulation, drywall, flooring, painting, and final inspections'
         ],
         results: [
-            '⏳ Срок реализации: 3 месяца',
-            '🚀 Ждём запуска проекта!'
+            '⏳ Project timeline: 8 months',
+            '🏡 3,200 sq ft living space',
+            '🌱 LEED Gold certified'
         ],
         links: {
-            demo: 'https://telegram.cyberteam-international.com/?id=wawe',
-            contact: 'https://t.me/daniilbortvin'
+            demo: 'https://telegram.cyberteam-international.com/?id=levelhouse',
+            contact: 'https://t.me/constructionusa'
         }
     },
-    {
-        id: 'aibooks',
-        title: 'AI Books',
-        subtitle: 'AI Start-Up онлайн сервис по озвучке текстов',
-        images: [
-            './img/aibooks1.jpg',
-            './img/aibooks2.jpg',
-            './img/aibooks3.jpg',
-            './img/aibooks4.jpg',
-            './img/aibooks5.jpg',
-        ],
-        goal: 'Реализовать удобный и понятный интерфейс с функционалом генеративной озвучки текстов пользователей',
-        steps: [
-            'Анализ конкурентов - поиск интересных офферов, оценка функционала и интерфейсов, а также уровня дизайна',
-            'Проектирование - Объеденение всех наиболее перспективных решений выявленных при анализе, создание прототипа',
-            'Дизайн - Сбор и удтверждение референсов, формирование концепции, отрисовка дизайн макета и UI Kit',
-            'Разработка - Ручная реализация проекта по средствам React/Next.js + NodeJs',
-            'Тестирование и отладка - Поиск и устранение проблем не корректного отображения на различных устройствах и платформах',
-            'Выпуск в продакшн - Размещение проекта на хостинге клиента, оптимизация скорости загрузки, подключение метрик, написание документации'
-        ],
-        results: [
-            '📈 Конверсия регистраций: 3,5%',
-            '⏳ Срок реализации: 8 месяцев'
-        ],
-        links: {
-            demo: 'https://telegram.cyberteam-international.com/?id=aibooks',
-            contact: 'https://t.me/daniilbortvin'
-        }
-    },
-    {
-        id: 'carmoney66',
-        title: 'CarMoney66',
-        subtitle: 'Срочный выкуп автомобилей в Екатеринбурге',
-        images: [
-            './img/carmoney661.jpg',
-            './img/carmoney662.jpg',
-            './img/carmoney663.jpg',
-            './img/carmoney664.jpg',
-        ],
-        goal: 'Создать современный, быстрый и удобный сайт для увеличения количества обращений через форму оценки авто. Сделать акцент на доверии и простоте процесса для клиента.',
-        steps: [
-            'Анализ конкурентов – изучили сайты лидеров на рынке автовыкупа, определили лучшие практики и составили карту болей и потребностей целевой аудитории',
-            'UX-проектирование – выстроили логичный путь пользователя: от первого экрана с оффером до формы онлайн-оценки',
-            'UI-дизайн – разработали минималистичный и вызывающий доверие визуал, адаптированный под все устройства',
-            'Фронтенд-разработка – ручная верстка на HTML, CSS, JS с упором на легкость и быструю загрузку',
-            'Интеграция с формами и аналитикой – реализована отправка заявок, подключены системы отслеживания событий (Google Analytics, Яндекс Метрика)',
-            'Тестирование и запуск – проверка корректности работы на всех устройствах и браузерах, размещение проекта на хостинге клиента'
-        ],
-        results: [
-            '📈 Конверсия: 4.26%',
-            '⏳ Срок реализации: 2 месяца'
-        ],
-        links: {
-            demo: 'https://telegram.cyberteam-international.com/?id=carmoney66',
-            contact: 'https://t.me/daniilbortvin'
-        }
-    },
-    {
-        id: 'animationschool',
-        title: 'Animation School',
-        subtitle: 'Крупнейшая онлайн академия по 3д моушен-дизайну',
-        images: [
-            './img/animationschool1.jpg',
-            './img/animationschool2.jpg',
-            './img/animationschool3.jpg',
-            './img/animationschool4.jpg',
-            './img/animationschool5.jpg',
-        ],
-        goal: 'Увеличить конверсию из посетителя в лида и сделать дизайн сайта более привлекательным и современным',
-        steps: [
-            'Анализ конкурентов - поиск интересных офферов, оценка уровня дизайна, формирование болей и потребностей целевой аудитории',
-            'Проектирование - Объеденение всех наиболее перспективных решений выявленных при анализе, создание прототипа',
-            'Дизайн - Сбор и удтверждение референсов, формирование концепции, отрисовка дизайн макета и UI Kit',
-            'Верстка - Ручная реализация проекта по средствам HTML, CSS, JS',
-            'Интеграция верстки на CMS WordPress',
-            'Тестирование и отладка - Поиск и устранение проблем не корректного отображения на различных устройствах и платформах',
-            'Выпуск в продакшн - Размещение проекта на хостинге клиента, оптимизация скорости загрузки, подключение метрик'
-        ],
-        results: [
-            '📈 Конверсия из посетителя в лида 3.18%',
-            '⏳ Срок реализации: 5 месяцев'
-        ],
-        links: {
-            demo: 'https://telegram.cyberteam-international.com/?id=animationschool',
-            contact: 'https://t.me/daniilbortvin'
-        }
-    },
-    
-    {
-        id: 'sferoom',
-        title: 'Sferoom',
-        subtitle: 'Услуги по продвижению музыкантов',
-        images: [
-            './img/sferoom1.jpg',
-            './img/sferoom2.jpg',
-            './img/sferoom3.jpg',
-            './img/sferoom4.jpg',
-            './img/sferoom5.jpg',
-            './img/sferoom6.jpg'
-        ],
-        goal: 'Увеличить конверсию из посетителя в лида и сделать дизайн сайта не обычным и запоминающимся',
-        steps: [
-            'Анализ конкурентов - поиск интересных офферов, оценка уровня дизайна, формирование болей и потребностей целевой аудитории',
-            'Проектирование - Объеденение всех наиболее перспективных решений выявленных при анализе, создание прототипа',
-            'Дизайн - Сбор и удтверждение референсов, формирование концепции, отрисовка дизайн макета и UI Kit',
-            'Верстка - Ручная реализация проекта по средствам HTML, CSS, JS с интеграцией на CMS WordPress',
-            'Тестирование и отладка - Поиск и устранение проблем не корректного отображения',
-            'Выпуск в продакшн - Размещение проекта на хостинге клиента, оптимизация скорости загрузки'
-        ],
-        results: [
-            '📈 Конверсия из посетителя в лида 11.43%',
-            '⏳ Срок реализации: 8 месяцев',
-        ],
-        links: {
-            demo: 'https://telegram.cyberteam-international.com/?id=sferoom',
-            contact: 'https://t.me/daniilbortvin'
-        }
-    },
-    
+
     {
         id: 'haswater',
-        title: 'HASWATER',
-        subtitle: 'Бренд элитной воды в Турции',
+        title: 'Commercial Office Building',
+        subtitle: 'Modern commercial construction in downtown area',
         images: [
             './img/haswater1.jpg',
             './img/haswater2.jpg',
@@ -254,120 +130,63 @@ export const casesData = [
             './img/haswater5.jpg',
             './img/haswater6.jpg',
             './img/haswater7.jpg',
+            './img/haswater8.jpg'
         ],
-        goal: 'Реализовать интересный и запоминающийся дизайн сайта по предоставленному прототипу',
+        goal: 'Construct a state-of-the-art office building with modern amenities and sustainable design features',
         steps: [
-            'Анализ конкурентов - Оценка уровня дизайна',
-            'Объеденение всех наиболее интересных решений',
-            'Сбор и удтверждение референсов',
-            'Формирование концепции',
-            'Отрисовка дизайн макета и UI Kit'
+            'Project planning – architectural design, structural engineering, and permit acquisition',
+            'Site preparation – excavation, utility connections, and foundation work',
+            'Structural work – steel frame construction and concrete flooring',
+            'Building envelope – exterior walls, windows, and roofing installation',
+            'Interior systems – electrical, plumbing, HVAC, and telecommunications',
+            'Finishing work – interior design, landscaping, and final inspections'
         ],
         results: [
-            '📈 Конверсия: 2.9%',
-            '⏳ Срок реализации: 2 месяца'
+            '📈 Project completed on time and within budget',
+            '⏳ Project timeline: 14 months',
+            '🏢 45,000 sq ft office space'
         ],
         links: {
-            demo: 'https://www.figma.com/proto/D32xYzn3TdcREZUHRzH3Te/HAS-Water-%2F-Promo-page-design?page-id=5%3A579&node-id=135-871&starting-point-node-id=135%3A681&scaling=min-zoom&mode=design&t=5aVNGbK47U5mgU3G-1',
-            contact: 'https://t.me/daniilbortvin'
+            demo: 'https://telegram.cyberteam-international.com/?id=haswater',
+            contact: 'https://t.me/constructionusa'
         }
     },
 
     {
-        id: 'levelhouse',
-        title: 'Level House',
-        subtitle: 'Котеджний поселок в Подмосковье',
+        id: 'sferoom',
+        title: 'Luxury Home Renovation',
+        subtitle: 'Complete interior and exterior renovation project',
         images: [
-            './img/levelhouse1.jpg',
-            './img/levelhouse2.jpg',
-            './img/levelhouse3.jpg',
-            './img/levelhouse4.jpg',
-            './img/levelhouse5.jpg',
-            './img/levelhouse6.jpg',
-            './img/levelhouse7.jpg',
+            './img/sferoom1.jpg',
+            './img/sferoom2.jpg',
+            './img/sferoom3.jpg',
+            './img/sferoom4.jpg',
+            './img/sferoom5.jpg',
+            './img/sferoom6.jpg'
         ],
-        goal: 'Увеличить конверсию из посетителя в лида и сделать дизайн сайта более привлекательным',
+        goal: 'Transform an outdated home into a modern luxury residence while preserving its architectural heritage.',
         steps: [
-            'Анализ конкурентов - поиск интересных офферов, оценка уровня дизайна, формирование болей и потребностей целевой аудитории',
-            'Проектирование - Объеденение всех наиболее перспективных решений выявленных при анализе, создание прототипа',
-            'Дизайн - Сбор и удтверждение референсов, формирование концепции, отрисовка дизайн макета и UI Kit',
-            'Верстка - Ручная реализация проекта по средствам HTML, CSS, JS без интеграции с CMS для экономии бюджета и времени',
-            'Тестирование и отладка - Поиск и устранение проблем не корректного отображения на различных устройствах и платформах',
-            'Выпуск в продакшн - Размещение проекта на хостинге клиента, оптимизация скорости загрузки, подключение метрик'
+            'Assessment and planning – structural evaluation, design planning, and permit acquisition',
+            'Demolition – careful removal of outdated elements while preserving structural integrity',
+            'Structural updates – reinforcing foundation, updating electrical and plumbing systems',
+            'Interior renovation – new flooring, modern kitchen and bathrooms, custom built-ins',
+            'Exterior improvements – new siding, windows, roofing, and landscaping',
+            'Final touches – painting, fixtures installation, and quality control inspection'
         ],
         results: [
-            '📈 Конверсия из посетителя в лида: 6%',
-            '⏳ Срок реализации: 1.5 месяца'
+            '🏠 Home value increased by 85%',
+            '⏳ Project timeline: 6 months',
+            '✨ Featured in local architecture magazine'
         ],
         links: {
-            demo: 'https://topverstka.github.io/levelhouse/',
-            contact: 'https://t.me/daniilbortvin'
+            demo: 'https://telegram.cyberteam-international.com/?id=sferoom',
+            contact: 'https://t.me/constructionusa'
         }
     },
-    {
-        id: 'nstv',
-        title: 'NS TV',
-        subtitle: 'Пикап курсы',
-        images: [
-            './img/nstv1.png',
-            './img/nstv2.png',
-            './img/nstv3.png',
-            './img/nstv4.png',
-            './img/nstv5.png',
-            './img/nstv6.png',
-            './img/nstv7.png',
-
-        ],
-        goal: 'Создать яркий, дерзкий и продающий лендинг, упаковывающий личный бренд и линейку инфопродуктов. Основная задача — вызвать доверие, показать экспертность и довести холодный трафик до покупки.',
-        steps: [
-            'Анализ ниши и конкурентов - Изучены сайты аналогичных тренеров, продюсеров и онлайн-школ. Выявлены общие боли ЦА: неуверенность, страх подойти, отсутствие опыта. Сформирован стиль: провокационно, живо, уверенно.',
-            'Проектирование - Составлена логика страницы: от УТП к продукту → блок доверия → разбор курсов → призыв к действию. Учтены барьеры ЦА: «стыдно», «не получится», «где результат?» — сняты через блоки выгоды и метрики.',
-            'Дизайн - Яркий, контрастный, эмоциональный визуал. Сильные заголовки ("LET\'S GO!", "100 девушек за 2 недели") вызывают интерес и вовлечение. Использована чёрно-белая цветовая гамма с акцентами на кнопках и блоках CTA.',
-            'Верстка и реализация - Лёгкая адаптивная вёрстка под мобильные и десктопы. Установлены формы захвата, плейлисты с видео, анимации. Реализована интеграция с CRM и настройка редиректов на закрытые каналы после покупки.',
-            'Тестирование и запуск - Проверена скорость загрузки, адаптивность, путь пользователя. Оптимизированы мета-теги, подключена аналитика.'
-        ],
-        results: [
-            '📈 Конверсия: 2.1%',
-            '⏳ Срок реализации: 3 недели'
-        ],
-        links: {
-            demo: 'https://nsmartynov.ru/',
-            contact: 'https://t.me/daniilbortvin'
-        }
-    },
-    {
-        id: 'buildflix',
-        title: 'Buildflix',
-        subtitle: 'Комерчесское строительство под ключ',
-        images: [
-            './img/buildflix1.png',
-            './img/buildflix2.png',
-            './img/buildflix3.png',
-            './img/buildflix4.png',
-            './img/buildflix5.png'
-        ],
-        goal: 'Создать современный сайт, вызывающий доверие у потенциальных клиентов и позволяющий удобно презентовать услуги, этапы работ и кейсы. Главный акцент — визуальный стиль, понятная структура и форма заявки.',
-        steps: [
-            'Анализ конкурентов - Изучены сайты строительных и ремонтных компаний. Выявлены лучшие приёмы подачи информации, способы демонстрации работ и схем взаимодействия с клиентом.',
-            'Структурирование - Разработана структура с последовательной логикой: от первого экрана → к услугам → к преимуществам → к кейсам → к форме заявки. Фокус на удобстве восприятия и понятной навигации.',
-            'Дизайн - Создан чистый, визуально солидный стиль. Использованы реальные фото объектов, иконки, фирменные цвета и графика. Акцент на надёжности и прозрачности.',
-            'Разработка на Tilda - Сайт собран на платформе Tilda с использованием Zero-блоков. Добавлены анимации, адаптация под все устройства, корректная верстка под SEO.',
-            'Тестирование и запуск - Сайт протестирован на мобильных и десктопах, подключены формы заявок и аналитика. Оптимизирована скорость загрузки.'
-        ],
-        results: [
-            '📈 Конверсия: 1.76%',
-            '⏳ Срок реализации: 3 недели'
-        ],
-        links: {
-            demo: 'https://project4533728.tilda.ws/',
-            contact: 'https://t.me/daniilbortvin'
-        }
-    },
-
     {
         id: 'mkgroup',
-        title: 'МК-Групп',
-        subtitle: 'Натяжные потолки в Санкт-Петербурге',
+        title: 'Industrial Warehouse',
+        subtitle: 'Large-scale commercial warehouse construction',
         images: [
             './img/mkgroup1.png',
             './img/mkgroup2.png',
@@ -375,22 +194,54 @@ export const casesData = [
             './img/mkgroup4.png',
             './img/mkgroup5.png'
         ],
-        goal: 'Презентовать ассортимент потолков LumFer, облегчить расчёт стоимости, побудить заполнить заявку в акции и собрать лиды через форму.',
+        goal: 'Build a modern industrial warehouse with efficient loading docks and climate control systems',
         steps: [
-            'Анализ ниши - Изучены сайты конкурентов по натяжным потолкам — выявлены популярные визуальные форматы, виды потолков и упаковка прайс-листов.',
-            'Структура сайта - Сформирована структура: привлекающий баннер с акцией и кнопкой заявки, интерактивный калькулятор расчёта проекта, детальное описание видов потолков, кейсы по словам "цена и скидка", элементы доверия (отзывы, опыт, сеть магазинов), удобная форма связи.',
-            'Дизайн - Чистый и функциональный интерфейс: фотографии готовых потолков, иконки преимуществ (немецкое качество, безопасность, чистый монтаж и др.), промо-блок с акцией "25% + светильники в подарок".',
-            'Реализация - Сайт собран на Tilda, Zero-блоках. Интегрирован калькулятор: ввод данных по площади, углам, свету — мгновенный расчёт с ценой и скидкой. Использованы формы обратного звонка, карта магазинов, динамическая дата окончания акции.',
-            'Тестирование и запуск - Проверена адаптивность, формы заявки и визуализация калькулятора. Подключена аналитика и авторасчёт.'
+            'Site planning – surveying large industrial site and coordinating with utility providers',
+            'Foundation work – massive concrete foundation with reinforced steel framework',
+            'Steel structure – erecting pre-engineered steel building with crane systems',
+            'Roofing and siding – installing industrial-grade roofing and exterior panels',
+            'Systems installation – electrical distribution, HVAC, fire safety, and security systems',
+            'Final inspection – comprehensive testing of all systems and safety protocols'
         ],
         results: [
-            '📈 Конверсия: 3.12%',
-            '⏳ Срок реализации: 2 недели'
+            '📦 150,000 sq ft storage capacity',
+            '⏳ Project timeline: 10 months',
+            '🚛 12 loading dock stations'
         ],
         links: {
-            demo: 'https://promo.mk-sky.ru/',
-            contact: 'https://t.me/daniilbortvin'
+            demo: 'https://telegram.cyberteam-international.com/?id=mkgroup',
+            contact: 'https://t.me/constructionusa'
+        }
+    },
+
+    {
+        id: 'buildflix',
+        title: 'Multi-Family Housing Complex',
+        subtitle: 'Affordable housing development project',
+        images: [
+            './img/buildflix1.png',
+            './img/buildflix2.png',
+            './img/buildflix3.png',
+            './img/buildflix4.png',
+            './img/buildflix5.png'
+        ],
+        goal: 'Develop an affordable housing complex with modern amenities and sustainable construction practices',
+        steps: [
+            'Community planning – working with city planners and community stakeholders for project approval',
+            'Site development – grading, utility installation, and infrastructure development',
+            'Foundation and framing – multi-building foundation work and structural framing',
+            'Building systems – coordinated installation of electrical, plumbing, and HVAC across all units',
+            'Interior finishing – flooring, cabinets, appliances, and paint in all residential units',
+            'Landscaping and amenities – common areas, playground, parking, and green spaces'
+        ],
+        results: [
+            '🏠 48 affordable housing units',
+            '⏳ Project timeline: 18 months',
+            '🌱 Green building certification achieved'
+        ],
+        links: {
+            demo: 'https://telegram.cyberteam-international.com/?id=buildflix',
+            contact: 'https://t.me/constructionusa'
         }
     }
-    
 ];

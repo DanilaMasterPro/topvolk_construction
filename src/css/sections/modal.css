@@ -61,7 +61,7 @@
 }
 
 .close-modal:hover {
-    color: #fff;
+    color: #333333;
 }
 
 .form-group {
@@ -77,22 +77,24 @@
 .form-group input {
     width: 100%;
     padding: 0.75rem;
-    background: rgba(96, 165, 250, 0.1);
-    border: 1px solid rgba(96, 165, 250, 0.2);
+    background: rgba(101, 183, 187, 0.1);
+    border: 1px solid rgba(101, 183, 187, 0.2);
     border-radius: 0.5rem;
-    color: #fff;
+    color: #333333;
     font-size: 1rem;
 }
 
 .form-group input:focus {
     outline: none;
-    border-color: rgba(96, 165, 250, 0.5);
+    /* Новая голубая граница при фокусе */
+    border-color: rgba(101, 183, 187, 0.5);
 }
 
 .submit-btn {
     width: 100%;
     padding: 0.75rem;
-    background: linear-gradient(135deg, #60a5fa 0%, #818cf8 100%);
+    /* Строительный новый голубой градиент */
+    background: #65b7bb;
     border: none;
     border-radius: 0.5rem;
     color: #fff;
@@ -103,7 +105,8 @@
 
 .submit-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(96, 165, 250, 0.3);
+    /* Новая голубая тень при hover */
+    box-shadow: 0 4px 12px rgba(101, 183, 187, 0.3);
 }
 
 @keyframes bounce {
@@ -146,7 +149,7 @@
     cursor: pointer;
     transition: all 0.3s ease;
     margin-top: 20px;
-    background: linear-gradient(135deg, #e100ff, #7300ff);
+    background: #65b7bb;
     color: #fff;
     border: none;
     box-shadow: 0 0 8px rgba(255, 0, 255, 0.6);

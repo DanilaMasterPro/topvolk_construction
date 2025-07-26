@@ -1,0 +1,73 @@
+.project-planning {
+    padding: 80px 0;
+    background-color: var(--bg-secondary);
+}
+
+.planning-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.planning-text {
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--text-primary);
+}
+
+.planning-text p {
+    margin-bottom: 24px;
+}
+
+.solution-block {
+    background: var(--bg-primary);
+    border-radius: 12px;
+    padding: 30px;
+    margin: 40px 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.solution-block h3 {
+    color: var(--accent);
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.requirements-list {
+    list-style: none;
+    padding-left: 20px;
+    margin: 20px 0;
+}
+
+.requirements-list li {
+    position: relative;
+    margin-bottom: 12px;
+    padding-left: 24px;
+}
+
+.requirements-list li:before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+}
+
+.project-planning .contact-btn {
+    width: 100%;
+    margin-top: 30px;
+}
+
+@media (max-width: 768px) {
+    .project-planning {
+        padding: 40px 0;
+    }
+    
+    .planning-text {
+        font-size: 16px;
+    }
+    
+    .solution-block {
+        padding: 20px;
+        margin: 30px 0;
+    }
+}
+

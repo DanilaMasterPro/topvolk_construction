@@ -2,15 +2,16 @@
 @import 'base.css';
 @import 'sections/header.css';
 @import 'sections/hero.css';
-@import 'sections/problems.css';
+@import 'sections/services.css';
 @import 'sections/approach.css';
 @import 'sections/price.css';
 @import 'sections/faq.css';
 @import 'sections/cases.css';
+@import 'sections/project-planning.css';
 @import 'sections/cost-calculator.css';
 @import 'sections/modal.css';
-@import 'sections/testimonials.css';
 @import 'sections/footer.css';
+
 @import 'sections/sections.css';
 
 .image-modal {
