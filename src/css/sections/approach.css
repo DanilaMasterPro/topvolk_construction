@@ -1,6 +1,13 @@
 .approach {
     padding: 50px 0;
+    background: #fff;
 }
+
+/* .approach .tech-tag {
+    background-color: #2e4d60;
+    color: #fff;
+} */
+
 
 .about-section {
     margin-bottom: 4rem;
@@ -14,7 +21,7 @@
 }
 
 .about-content {
-    color: #94a3b8;
+    color: #64748b;
     line-height: 1.6;
 }
 
@@ -66,18 +73,19 @@
 }
 
 .approach-card {
-    background: rgba(101, 183, 187, 0.1);
-    border: 1px solid rgba(101, 183, 187, 0.2);
+    background: #ffffff;
     border-radius: 1rem;
     padding: 2rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
+    border: 1px solid rgba(101, 183, 187, 0.1);
 }
 
 .approach-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 4px 12px rgba(101, 183, 187, 0.2);
-    border: 1px solid rgba(101, 183, 187, 0.2);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
 }
+
 
 .approach-icon {
     font-size: 2rem;
@@ -91,12 +99,12 @@
 }
 
 .approach-card h3 {
-    color: #65b7bb;
+    color: #2e4d60;
     margin-bottom: 1rem;
 }
 
 .approach-card p {
-    color: #94a3b8;
+    color: #64748b;
 }
 
 

@@ -80,8 +80,28 @@
     background: rgba(101, 183, 187, 0.1);
     border: 1px solid rgba(101, 183, 187, 0.2);
     border-radius: 0.5rem;
-    color: #333333;
+    color: white;
     font-size: 1rem;
+}
+
+.form-group input::placeholder {
+    color: #ffffff;
+    opacity: 0.7;
+}
+
+.form-group input::-webkit-input-placeholder {
+    color: #ffffff;
+    opacity: 0.7;
+}
+
+.form-group input::-moz-placeholder {
+    color: #ffffff;
+    opacity: 0.7;
+}
+
+.form-group input:-ms-input-placeholder {
+    color: #ffffff;
+    opacity: 0.7;
 }
 
 .form-group input:focus {
