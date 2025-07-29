@@ -40,23 +40,26 @@
 }
 
 .load-more-btn {
-    background: #fbbf24;
-    color: #1f2937;
+    /* Строительные цвета - новый голубой градиент */
+    background: #65b7bb;
     border: none;
-    padding: 15px 40px;
-    border-radius: 50px;
-    font-size: 1.1rem;
-    font-weight: 600;
+    border-radius: 0.5rem;
+    color: #fff;
+    font-size: 1rem;
+    padding: 0.75rem 1.5rem;
     cursor: pointer;
     transition: all 0.3s ease;
+    box-shadow: 0 0 8px rgba(101, 183, 187, 0.6);
     text-transform: uppercase;
     letter-spacing: 1px;
+    font-weight: 600;
 }
 
 .load-more-btn:hover {
-    background: #f59e0b;
+    background: #5aa5a9;
     transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(251, 191, 36, 0.3);
+    /* Новая голубая тень при hover */
+    box-shadow: 0 4px 12px rgba(101, 183, 187, 0.4);
 }
 
 /* Responsive */
@@ -220,6 +223,7 @@
 }
 
 .contact-btn:hover {
+    background: #5aa5a9;
     transform: translateY(-2px);
     /* Новая голубая тень при hover */
     box-shadow: 0 4px 12px rgba(101, 183, 187, 0.4);
