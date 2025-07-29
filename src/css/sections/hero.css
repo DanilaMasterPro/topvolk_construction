@@ -131,7 +131,8 @@ h1 {
 
     .hero{
         min-height: calc(100vh - 82px); /* Мобильная версия: 1rem*2 + 50px логотип = ~82px */
-        padding: 4rem 0rem;
+        padding: 20px 0px;
+
     }
     h1 {
         font-size: 1.6rem;

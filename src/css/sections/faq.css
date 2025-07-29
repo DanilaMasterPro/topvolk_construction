@@ -53,4 +53,8 @@
     .faq-question {
         font-size: 1.1rem;
     }
+    .faq-question .emoji{
+        position: relative;
+        top: 12px;
+    }
 }
