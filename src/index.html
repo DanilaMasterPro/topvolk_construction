@@ -221,28 +221,28 @@
                 <h2 class="section-title">Our Recent Home Renovation Works</h2>
                 <div class="portfolio-grid">
                     <div class="portfolio-item">
-                        <img src="./img/services1.jpg" alt="Construction Project 1">
+                        <img src="./img/portfolio/1.jpg" alt="Construction Project 1">
                     </div>
                     <div class="portfolio-item">
-                        <img src="./img/services2.jpg" alt="Construction Project 2">
+                        <img src="./img/portfolio/2.jpg" alt="Construction Project 2">
                     </div>
                     <div class="portfolio-item">
-                        <img src="./img/services3.jpg" alt="Construction Project 3">
+                        <img src="./img/portfolio/3.jpg" alt="Construction Project 3">
                     </div>
                     <div class="portfolio-item">
-                        <img src="./img/services4.jpg" alt="Construction Project 4">
+                        <img src="./img/portfolio/4.jpg" alt="Construction Project 4">
                     </div>
                     <div class="portfolio-item">
-                        <img src="./img/services5.jpg" alt="Construction Project 5">
+                        <img src="./img/portfolio/5.jpg" alt="Construction Project 5">
                     </div>
                     <div class="portfolio-item">
-                        <img src="./img/services6.jpg" alt="Construction Project 6">
+                        <img src="./img/portfolio/6.jpg" alt="Construction Project 6">
                     </div>
                     <div class="portfolio-item">
-                        <img src="./img/services1.jpg" alt="Construction Project 7">
+                        <img src="./img/portfolio/7.jpg" alt="Construction Project 7">
                     </div>
                     <div class="portfolio-item">
-                        <img src="./img/services2.jpg" alt="Construction Project 8">
+                        <img src="./img/portfolio/8.jpg" alt="Construction Project 8">
                     </div>
                 </div>
                 <div class="portfolio-cta">
@@ -429,6 +429,9 @@
                 }
             });
 
+            // Portfolio functionality
+            initPortfolio();
+
             // Отправка форм
             const contactForm = document.getElementById('contactForm');
             const calculatorForm = document.getElementById('calculatorForm');
@@ -485,6 +488,117 @@
                 });
             }
         });
+
+        // Portfolio functionality
+        let currentPortfolioIndex = 8; // Уже показано 8 изображений
+        const totalImages = 42; // Всего изображений в папке portfolio
+        const imagesPerLoad = 8; // Загружать по 8 за раз
+
+        function initPortfolio() {
+            // Lightbox функционал
+            initLightbox();
+            
+            // Load more функционал
+            const loadMoreBtn = document.querySelector('.load-more-btn');
+            if (loadMoreBtn) {
+                loadMoreBtn.addEventListener('click', loadMoreImages);
+            }
+        }
+
+        function initLightbox() {
+            const portfolioItems = document.querySelectorAll('.portfolio-item');
+            portfolioItems.forEach((item, index) => {
+                item.addEventListener('click', () => {
+                    const img = item.querySelector('img');
+                    openLightbox(img.src, index);
+                });
+            });
+        }
+
+        function openLightbox(imageSrc, currentIndex) {
+            // Создаем lightbox если его еще нет
+            let lightbox = document.getElementById('lightbox');
+            if (!lightbox) {
+                lightbox = createLightbox();
+            }
+
+            const lightboxImg = lightbox.querySelector('.lightbox-image');
+            lightboxImg.src = imageSrc;
+            lightbox.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function createLightbox() {
+            const lightbox = document.createElement('div');
+            lightbox.id = 'lightbox';
+            lightbox.className = 'lightbox';
+            lightbox.innerHTML = `
+                <div class="lightbox-content">
+                    <span class="lightbox-close">&times;</span>
+                    <img class="lightbox-image" src="" alt="Portfolio Image">
+                </div>
+            `;
+
+            document.body.appendChild(lightbox);
+
+            // Обработчики событий
+            const closeBtn = lightbox.querySelector('.lightbox-close');
+            closeBtn.addEventListener('click', closeLightbox);
+
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox) {
+                    closeLightbox();
+                }
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    closeLightbox();
+                }
+            });
+
+            return lightbox;
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            if (lightbox) {
+                lightbox.style.display = 'none';
+                document.body.style.overflow = '';
+            }
+        }
+
+        function loadMoreImages() {
+            const portfolioGrid = document.querySelector('.portfolio-grid');
+            const loadMoreBtn = document.querySelector('.load-more-btn');
+            
+            // Определяем сколько изображений загрузить
+            const remainingImages = totalImages - currentPortfolioIndex;
+            const imagesToLoad = Math.min(imagesPerLoad, remainingImages);
+            
+            // Загружаем новые изображения
+            for (let i = 0; i < imagesToLoad; i++) {
+                const imageIndex = currentPortfolioIndex + i + 1;
+                const portfolioItem = document.createElement('div');
+                portfolioItem.className = 'portfolio-item';
+                portfolioItem.innerHTML = `<img src="./img/portfolio/${imageIndex}.jpg" alt="Construction Project ${imageIndex}">`;
+                
+                // Добавляем lightbox обработчик для нового элемента
+                portfolioItem.addEventListener('click', () => {
+                    const img = portfolioItem.querySelector('img');
+                    openLightbox(img.src, currentPortfolioIndex + i);
+                });
+                
+                portfolioGrid.appendChild(portfolioItem);
+            }
+            
+            currentPortfolioIndex += imagesToLoad;
+            
+            // Скрываем кнопку если все изображения загружены
+            if (currentPortfolioIndex >= totalImages) {
+                loadMoreBtn.style.display = 'none';
+            }
+        }
     </script>
     <script type="module" src="./js/main.js"></script>
 </body>
