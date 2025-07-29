@@ -325,8 +325,8 @@
          <footer class="footer">
             <div class="container">
                 <div class="footer__bottom">
-                    <a href="/privacy-policy.html" class="footer__link">Privacy Policy</a>
-                    <p class="footer__copyright">© 2024 Construction USA. All rights reserved.</p>
+                    <a href="#" class="footer__link privacy-link">Privacy Policy</a>
+                    <p class="footer__copyright">© 2024 TopVolk Construction. All rights reserved.</p>
                 </div>
             </div>
         </footer>
@@ -373,6 +373,77 @@
         <img id="modalImage" src="" alt="Enlarged testimonial">
     </div>
 
+    <!-- Privacy Policy Modal -->
+    <div id="privacyModal" class="modal">
+        <div class="modal-content privacy-modal">
+            <span class="close-modal">&times;</span>
+            <div class="privacy-content">
+                <h2 class="privacy-title">Privacy Policy</h2>
+                <div class="privacy-text">
+                    <p><strong>Effective Date:</strong> January 1, 2024</p>
+                    
+                    <h3>1. Information We Collect</h3>
+                    <p>TopVolk Construction ("we," "our," or "us") collects the following personal information when you submit a request through our website:</p>
+                    <ul>
+                        <li><strong>Name:</strong> To identify and address you personally</li>
+                        <li><strong>Contact Information:</strong> Phone number, Telegram username, or WhatsApp number to communicate with you about your construction project</li>
+                    </ul>
+
+                    <h3>2. How We Use Your Information</h3>
+                    <p>We use your personal information for the following purposes:</p>
+                    <ul>
+                        <li>To respond to your construction service inquiries</li>
+                        <li>To provide cost estimates and project proposals</li>
+                        <li>To schedule consultations and site visits</li>
+                        <li>To communicate project updates and timelines</li>
+                        <li>To improve our services and customer experience</li>
+                    </ul>
+
+                    <h3>3. Information Sharing</h3>
+                    <p>We do not sell, trade, or share your personal information with third parties except:</p>
+                    <ul>
+                        <li>With your explicit consent</li>
+                        <li>When required by law or legal process</li>
+                        <li>With trusted subcontractors when necessary for your project (with your prior consent)</li>
+                    </ul>
+
+                    <h3>4. Data Security</h3>
+                    <p>We implement appropriate security measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction. Your information is transmitted securely and stored in protected systems.</p>
+
+                    <h3>5. Data Retention</h3>
+                    <p>We retain your personal information for as long as necessary to provide services and comply with legal obligations. Typically, we keep contact information for 2 years after your last interaction with us.</p>
+
+                    <h3>6. Your Rights</h3>
+                    <p>Under applicable privacy laws, you have the right to:</p>
+                    <ul>
+                        <li>Access your personal information</li>
+                        <li>Correct inaccurate information</li>
+                        <li>Request deletion of your information</li>
+                        <li>Opt-out of communications</li>
+                    </ul>
+
+                    <h3>7. Cookies and Tracking</h3>
+                    <p>Our website may use cookies to improve user experience. These are not used to track personal information or share data with third parties.</p>
+
+                    <h3>8. Contact Information</h3>
+                    <p>For questions about this Privacy Policy or to exercise your rights, contact us:</p>
+                    <ul>
+                        <li><strong>Company:</strong> TopVolk Construction</li>
+                        <li><strong>Phone:</strong> +1 (206) 591-1096</li>
+                        <li><strong>Telegram:</strong> @vladyshk1</li>
+                        <li><strong>Instagram:</strong> @topvolk_construction</li>
+                    </ul>
+
+                    <h3>9. Updates to Privacy Policy</h3>
+                    <p>We may update this Privacy Policy periodically. Changes will be posted on this page with an updated effective date.</p>
+
+                    <h3>10. Compliance</h3>
+                    <p>This Privacy Policy complies with applicable U.S. federal and state privacy laws, including the California Consumer Privacy Act (CCPA) where applicable.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     
 
@@ -390,9 +461,19 @@
         function closeModal() {
             const modal = document.getElementById('contactModal');
             const successModal = document.getElementById('successModal');
+            const privacyModal = document.getElementById('privacyModal');
             if (modal) modal.style.display = 'none';
             if (successModal) successModal.style.display = 'none';
+            if (privacyModal) privacyModal.style.display = 'none';
             document.body.style.overflow = '';
+        }
+
+        function openPrivacyModal() {
+            const modal = document.getElementById('privacyModal');
+            if (modal) {
+                modal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            }
         }
 
         // Инициализация
@@ -407,10 +488,20 @@
             window.addEventListener('click', function(e) {
                 const modal = document.getElementById('contactModal');
                 const successModal = document.getElementById('successModal');
-                if (e.target === modal || e.target === successModal) {
+                const privacyModal = document.getElementById('privacyModal');
+                if (e.target === modal || e.target === successModal || e.target === privacyModal) {
                     closeModal();
                 }
             });
+
+            // Privacy Policy ссылка
+            const privacyLink = document.querySelector('.privacy-link');
+            if (privacyLink) {
+                privacyLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    openPrivacyModal();
+                });
+            }
 
             // Кнопка "Great"
             const successBtn = document.querySelector('.success-btn');
