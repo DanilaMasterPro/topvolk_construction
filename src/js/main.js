@@ -2,6 +2,18 @@ import { casesData, renderCaseCard, renderModalCaseCard } from './casesData.js';
 import { initNeuralBackground } from './neuralBackground.js';
 import { pricingData, renderPricingCard } from './pricingData.js';
 
+// Глобальная функция для открытия модального окна
+function openContactModal() {
+    const modal = document.getElementById('contactModal');
+    if (modal) {
+        modal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+// Делаем функцию доступной глобально
+window.openContactModal = openContactModal;
+
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize neural background
     initNeuralBackground();
@@ -14,7 +26,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Portfolio grid functionality
     initPortfolioGrid();
+
+    // Initialize modal functionality
+    initModalHandlers();
 });
+
+// Дополнительная инициализация на случай, если DOMContentLoaded уже прошло
+if (document.readyState === 'loading') {
+    // Документ еще загружается - обработчик выше сработает
+} else {
+    // Документ уже загружен - запускаем инициализацию немедленно
+    initNeuralBackground();
+    initPortfolioGrid();
+    initModalHandlers();
+}
 
 function initializeSlider(slider) {
     const slides = slider.querySelectorAll('img');
@@ -77,49 +102,6 @@ function initializeSlider(slider) {
     
     // Optional: Auto-advance slides
     setInterval(nextSlide, 5000);
-}
-
-// Modal handling
-const modal = document.getElementById('contactModal');
-const successModal = document.getElementById('successModal');
-const closeButtons = document.querySelectorAll('.close-modal');
-const successBtn = document.querySelector('.success-btn');
-
-// Обработчик для всех кнопок contact-btn
-document.addEventListener('click', (e) => {
-    if (e.target.closest('.contact-btn')) {
-        e.preventDefault();
-        if (!e.target.closest('form')) { // Проверяем, что кнопка не внутри формы
-            modal.style.display = 'block';
-            document.body.style.overflow = 'hidden';
-        }
-    }
-});
-
-// Закрытие модальных окон
-closeButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-        modal.style.display = 'none';
-        successModal.style.display = 'none';
-        document.body.style.overflow = '';
-    });
-});
-
-// Закрытие по клику вне модального окна
-window.addEventListener('click', (e) => {
-    if (e.target === modal || e.target === successModal) {
-        modal.style.display = 'none';
-        successModal.style.display = 'none';
-        document.body.style.overflow = '';
-    }
-});
-
-// Кнопка "Отлично" в окне успеха
-if (successBtn) {
-    successBtn.addEventListener('click', () => {
-        successModal.style.display = 'none';
-        document.body.style.overflow = '';
-    });
 }
 
 // Инициализация слайдера отзывов
@@ -229,8 +211,8 @@ caseModalContent.addEventListener('click', (e) => {
 
 // Общая функция для отправки формы
 async function handleFormSubmit(formData, isCalculator = false) {
-    const BOT_TOKEN = '7808652944:AAHDqPPqu2_IbKpFg02rBjWwtDJN_aDomjs';
-    const CHAT_ID = '612414314';
+    const BOT_TOKEN = '8313640162:AAELBXYThEtUd0z83BUa74LqhZkVkqVKlkM';
+    const CHAT_ID = '-1002751940045';
     
     const message = `
 🔥 Новая заявка${isCalculator ? ' на расчет стоимости' : ''}!
@@ -267,9 +249,83 @@ async function handleFormSubmit(formData, isCalculator = false) {
         return false;
     }
 }
+// Portfolio grid functionality
+function initPortfolioGrid() {
+    const loadMoreBtn = document.querySelector('.load-more-btn');
+    const portfolioItems = document.querySelectorAll('.portfolio-item');
+    
+    // Add click handler for portfolio items (optional - for future lightbox)
+    portfolioItems.forEach(item => {
+        item.addEventListener('click', function() {
+            const img = this.querySelector('img');
+            // Here you can add lightbox functionality if needed
+            console.log('Portfolio item clicked:', img.src);
+        });
+    });
+    
+    // Load more button functionality
+    if (loadMoreBtn) {
+        loadMoreBtn.addEventListener('click', function() {
+            // Here you can add functionality to load more portfolio items
+            // For now, just show an alert
+            alert('Load more functionality - here you can add AJAX request to load more portfolio items');
+        });
+    }
+}
 
-// Обработчик для обеих форм
-document.addEventListener('DOMContentLoaded', () => {
+// Modal handling function
+function initModalHandlers() {
+    const modal = document.getElementById('contactModal');
+    const successModal = document.getElementById('successModal');
+    const closeButtons = document.querySelectorAll('.close-modal');
+    const successBtn = document.querySelector('.success-btn');
+
+    console.log('Initializing modal handlers...');
+    
+    // Прямая обработка кнопок contact-btn
+    const contactButtons = document.querySelectorAll('.contact-btn');
+    console.log('Found contact buttons:', contactButtons.length);
+    
+    contactButtons.forEach(btn => {
+        // Проверяем, что кнопка не внутри формы
+        if (!btn.closest('form')) {
+            console.log('Adding click handler to button:', btn);
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                console.log('Contact button clicked, opening modal');
+                modal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            });
+        }
+    });
+
+    // Закрытие модальных окон
+    closeButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            modal.style.display = 'none';
+            successModal.style.display = 'none';
+            document.body.style.overflow = '';
+        });
+    });
+
+    // Закрытие по клику вне модального окна
+    window.addEventListener('click', (e) => {
+        if (e.target === modal || e.target === successModal) {
+            modal.style.display = 'none';
+            successModal.style.display = 'none';
+            document.body.style.overflow = '';
+        }
+    });
+
+    // Кнопка "Отлично" в окне успеха
+    if (successBtn) {
+        successBtn.addEventListener('click', () => {
+            successModal.style.display = 'none';
+            document.body.style.overflow = '';
+        });
+    }
+
+    // Обработка форм
     const contactForm = document.getElementById('contactForm');
     const calculatorForm = document.getElementById('calculatorForm');
 
@@ -301,30 +357,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 calculatorForm.reset();
                 successModal.style.display = 'block';
             }
-        });
-    }
-});
-
-// Portfolio grid functionality
-function initPortfolioGrid() {
-    const loadMoreBtn = document.querySelector('.load-more-btn');
-    const portfolioItems = document.querySelectorAll('.portfolio-item');
-    
-    // Add click handler for portfolio items (optional - for future lightbox)
-    portfolioItems.forEach(item => {
-        item.addEventListener('click', function() {
-            const img = this.querySelector('img');
-            // Here you can add lightbox functionality if needed
-            console.log('Portfolio item clicked:', img.src);
-        });
-    });
-    
-    // Load more button functionality
-    if (loadMoreBtn) {
-        loadMoreBtn.addEventListener('click', function() {
-            // Here you can add functionality to load more portfolio items
-            // For now, just show an alert
-            alert('Load more functionality - here you can add AJAX request to load more portfolio items');
         });
     }
 }

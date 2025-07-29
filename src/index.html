@@ -376,6 +376,115 @@
     
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script>
+        // Простые функции для модальных окон
+        function openContactModal() {
+            const modal = document.getElementById('contactModal');
+            if (modal) {
+                modal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('contactModal');
+            const successModal = document.getElementById('successModal');
+            if (modal) modal.style.display = 'none';
+            if (successModal) successModal.style.display = 'none';
+            document.body.style.overflow = '';
+        }
+
+        // Инициализация
+        document.addEventListener('DOMContentLoaded', function() {
+            // Обработчики для закрытия
+            const closeButtons = document.querySelectorAll('.close-modal');
+            closeButtons.forEach(btn => {
+                btn.addEventListener('click', closeModal);
+            });
+
+            // Закрытие по клику вне модального окна
+            window.addEventListener('click', function(e) {
+                const modal = document.getElementById('contactModal');
+                const successModal = document.getElementById('successModal');
+                if (e.target === modal || e.target === successModal) {
+                    closeModal();
+                }
+            });
+
+            // Кнопка "Great"
+            const successBtn = document.querySelector('.success-btn');
+            if (successBtn) {
+                successBtn.addEventListener('click', closeModal);
+            }
+
+            // Все кнопки contact-btn
+            const contactButtons = document.querySelectorAll('.contact-btn');
+            contactButtons.forEach(btn => {
+                if (!btn.closest('form')) {
+                    btn.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        openContactModal();
+                    });
+                }
+            });
+
+            // Отправка форм
+            const contactForm = document.getElementById('contactForm');
+            const calculatorForm = document.getElementById('calculatorForm');
+
+            async function sendToTelegram(formData, isCalculator = false) {
+                const BOT_TOKEN = '8313640162:AAELBXYThEtUd0z83BUa74LqhZkVkqVKlkM';
+                const CHAT_ID = '-1002751940045';
+                
+                const message = `🔥 Новая заявка${isCalculator ? ' на расчет стоимости' : ''}!\n\n👤 Имя: ${formData.name}\n📱 Контакт: ${formData.contact}`;
+                
+                try {
+                    const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ chat_id: CHAT_ID, text: message })
+                    });
+                    return response.ok;
+                } catch (error) {
+                    console.error('Error:', error);
+                    return false;
+                }
+            }
+
+            if (contactForm) {
+                contactForm.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    const formData = {
+                        name: document.getElementById('name').value,
+                        contact: document.getElementById('contact').value
+                    };
+                    
+                    if (await sendToTelegram(formData)) {
+                        contactForm.reset();
+                        closeModal();
+                        document.getElementById('successModal').style.display = 'block';
+                        document.body.style.overflow = 'hidden';
+                    }
+                });
+            }
+
+            if (calculatorForm) {
+                calculatorForm.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    const formData = {
+                        name: document.getElementById('calc-name').value,
+                        contact: document.getElementById('calc-contact').value
+                    };
+                    
+                    if (await sendToTelegram(formData, true)) {
+                        calculatorForm.reset();
+                        document.getElementById('successModal').style.display = 'block';
+                        document.body.style.overflow = 'hidden';
+                    }
+                });
+            }
+        });
+    </script>
     <script type="module" src="./js/main.js"></script>
 </body>
 </html>
