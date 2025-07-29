@@ -6,36 +6,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize neural background
     initNeuralBackground();
 
-    // Render cases
-    const casesContainer = document.querySelector('.cases-slider .swiper-wrapper');
-    casesContainer.innerHTML = casesData.map(caseData => renderCaseCard(caseData)).join('');
-
-    // Initialize cases slider
-    const casesSwiper = new Swiper('.cases-slider .swiper', {
-        slidesPerView: 1,
-        spaceBetween: 30,
-        pagination: {
-            el: '.cases-slider .swiper-pagination',
-            clickable: true,
-        },
-
-        breakpoints: {
-            // >= 768px
-            768: {
-                slidesPerView: 2,
-            },
-            // >= 1024px
-            1024: {
-                slidesPerView: 2,
-            }
-        }
-    });
-
     // Initialize pricing cards
     const pricingContainer = document.querySelector('.pricing-grid');
     if (pricingContainer) {
         pricingContainer.innerHTML = pricingData.map(pricing => renderPricingCard(pricing)).join('');
     }
+
+    // Portfolio grid functionality
+    initPortfolioGrid();
 });
 
 function initializeSlider(slider) {
@@ -326,3 +304,27 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+// Portfolio grid functionality
+function initPortfolioGrid() {
+    const loadMoreBtn = document.querySelector('.load-more-btn');
+    const portfolioItems = document.querySelectorAll('.portfolio-item');
+    
+    // Add click handler for portfolio items (optional - for future lightbox)
+    portfolioItems.forEach(item => {
+        item.addEventListener('click', function() {
+            const img = this.querySelector('img');
+            // Here you can add lightbox functionality if needed
+            console.log('Portfolio item clicked:', img.src);
+        });
+    });
+    
+    // Load more button functionality
+    if (loadMoreBtn) {
+        loadMoreBtn.addEventListener('click', function() {
+            // Here you can add functionality to load more portfolio items
+            // For now, just show an alert
+            alert('Load more functionality - here you can add AJAX request to load more portfolio items');
+        });
+    }
+}

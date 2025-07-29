@@ -1,5 +1,5 @@
 .services {
-    padding: 6rem 0;
+    padding: 100px 0;
     background: #fff;
 }
 
@@ -19,11 +19,6 @@
     border: 1px solid rgba(101, 183, 187, 0.1);
 }
 
-.service-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 8px 30px rgba(101, 183, 187, 0.2);
-    border: 1px solid rgba(101, 183, 187, 0.3);
-}
 
 .service-image {
     height: 200px;
@@ -38,9 +33,9 @@
     transition: transform 0.3s ease;
 }
 
-.service-card:hover .service-image img {
+/* .service-card:hover .service-image img {
     transform: scale(1.05);
-}
+} */
 
 .service-content {
     padding: 2rem;
