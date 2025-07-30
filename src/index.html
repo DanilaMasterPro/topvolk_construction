@@ -370,7 +370,7 @@
                                     </div>
                                     <p class="testimonial-text">"My shingles blew off, and TopVolk construction llc fixed it."</p>
                                     <div class="testimonial-bottom">
-                                        <button class="show-more-btn" onclick="openTestimonialModal(this)" style="display: none;">Show more</button>
+                                        <button class="show-more-btn" onclick="openTestimonialModal(this)">Show more</button>
                                         <div class="testimonial-date">6 days ago</div>
                                     </div>
                                 </div>
@@ -400,7 +400,7 @@
                                     </div>
                                     <p class="testimonial-text">"Outstanding work done by Vlad and team for our home cabinet / living room interior work. Very professional and reasonable charges. Love the service."</p>
                                     <div class="testimonial-bottom">
-                                        <button class="show-more-btn" onclick="openTestimonialModal(this)" style="display: none;">Show more</button>
+                                        <button class="show-more-btn" onclick="openTestimonialModal(this)">Show more</button>
                                         <div class="testimonial-date">2 months ago</div>
                                     </div>
                                 </div>
@@ -430,7 +430,7 @@
                                     </div>
                                     <p class="testimonial-text">"Excellent work. Good price! I recommend! Fast and high quality!"</p>
                                     <div class="testimonial-bottom">
-                                        <button class="show-more-btn" onclick="openTestimonialModal(this)" style="display: none;">Show more</button>
+                                        <button class="show-more-btn" onclick="openTestimonialModal(this)">Show more</button>
                                         <div class="testimonial-date">6 days ago</div>
                                     </div>
                                 </div>
@@ -490,7 +490,7 @@
                                     </div>
                                     <p class="testimonial-text">"Great job! Very professional, efficient, and friendly. Everything was done perfectly. Highly recommended!"</p>
                                     <div class="testimonial-bottom">
-                                        <button class="show-more-btn" onclick="openTestimonialModal(this)" style="display: none;">Show more</button>
+                                        <button class="show-more-btn" onclick="openTestimonialModal(this)">Show more</button>
                                         <div class="testimonial-date">3 weeks ago</div>
                                     </div>
                                 </div>
@@ -840,8 +840,10 @@
             // Initialize testimonials slider
             initTestimonialsSlider();
 
-            // Check which testimonials need "Show more" button
-            checkTestimonialsOverflow();
+            // Check which testimonials need "Show more" button after slider is initialized
+            setTimeout(() => {
+                checkTestimonialsOverflow();
+            }, 100);
 
             // Отправка форм
             const contactForm = document.getElementById('contactForm');
@@ -1040,28 +1042,50 @@
 
         // Check which testimonials need "Show more" button
         function checkTestimonialsOverflow() {
-            const testimonialTexts = document.querySelectorAll('.testimonial-text');
+            const testimonialItems = document.querySelectorAll('.testimonial-item');
             
-            testimonialTexts.forEach(text => {
-                const showMoreBtn = text.parentElement.querySelector('.show-more-btn');
-                if (showMoreBtn) {
-                    // Временно убираем ограничение на строки
-                    text.style.webkitLineClamp = 'unset';
-                    text.style.overflow = 'visible';
+            testimonialItems.forEach(item => {
+                const text = item.querySelector('.testimonial-text');
+                const showMoreBtn = item.querySelector('.show-more-btn');
+                
+                if (text && showMoreBtn) {
+                    // Создаем временный элемент для измерения реальной высоты текста
+                    const tempElement = text.cloneNode(true);
+                    tempElement.style.position = 'absolute';
+                    tempElement.style.visibility = 'hidden';
+                    tempElement.style.height = 'auto';
+                    tempElement.style.webkitLineClamp = 'unset';
+                    tempElement.style.overflow = 'visible';
+                    tempElement.style.width = text.offsetWidth + 'px';
                     
-                    // Проверяем реальную высоту против высоты 4 строк
-                    const lineHeight = parseInt(window.getComputedStyle(text).lineHeight);
-                    const maxHeight = lineHeight * 4;
+                    document.body.appendChild(tempElement);
                     
-                    if (text.scrollHeight > maxHeight) {
+                    // Получаем высоту ограниченного текста (4 строки)
+                    const limitedElement = text.cloneNode(true);
+                    limitedElement.style.position = 'absolute';
+                    limitedElement.style.visibility = 'hidden';
+                    limitedElement.style.width = text.offsetWidth + 'px';
+                    limitedElement.style.webkitLineClamp = '4';
+                    limitedElement.style.overflow = 'hidden';
+                    limitedElement.style.display = '-webkit-box';
+                    limitedElement.style.webkitBoxOrient = 'vertical';
+                    
+                    document.body.appendChild(limitedElement);
+                    
+                    // Сравниваем высоты
+                    const fullHeight = tempElement.offsetHeight;
+                    const limitedHeight = limitedElement.offsetHeight;
+                    
+                    // Показываем кнопку только если текст обрезается
+                    if (fullHeight > limitedHeight + 5) { // +5px запас для точности
                         showMoreBtn.style.display = 'block';
                     } else {
                         showMoreBtn.style.display = 'none';
                     }
                     
-                    // Возвращаем ограничение
-                    text.style.webkitLineClamp = '4';
-                    text.style.overflow = 'hidden';
+                    // Удаляем временные элементы
+                    document.body.removeChild(tempElement);
+                    document.body.removeChild(limitedElement);
                 }
             });
         }
