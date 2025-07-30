@@ -16,6 +16,10 @@ body {
     line-height: 1.6;
 }
 
+
+body .swiper-pagination{
+    position: relative;
+}
 .container {
     max-width: 1200px;
     width: 100%;
@@ -36,6 +40,8 @@ body {
     /* Строительный акцентный цвет - темно-синий */
     color: #2e4d60;
 }
+
+
 
 @media (max-width: 768px) {
     .section-title {
